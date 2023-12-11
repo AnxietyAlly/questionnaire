@@ -1,8 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import {
-  getAllQuestions,
-  getSingleQuestion
+  getAllQuestionnaires,
+  getSingleQuestionnaire,
+  getAllQuestionsOfQuestionnaire,
+  getSingleQuestion,
+  getCorrectAnswersOfSingleQuestion,
+  getAllMentalProblems,
+  getSingleMentalProblem
 } from '../controllers/questionnaireController.js';
 const router = express.Router();
 
@@ -27,9 +32,13 @@ router.options('/questionnaire', (req, res, next) => {
   }
 });
 
-// get a collection of all the accounts, you can also use a query
-router.get('/questionnaire/questions', cors(), getAllQuestions);
-router.get('/questionnaire/questions/:id', cors(), getSingleQuestion);
+router.get('/questionnaires', cors(), getAllQuestionnaires);
+router.get('/questionnaires/:questionnaire_id', cors(), getSingleQuestionnaire);
+router.get('/questionnaires/:questionnaire_id/questions', cors(), getAllQuestionsOfQuestionnaire);
+router.get('/questions/:question_id', cors(), getSingleQuestion);
+router.get('/questions/:question_id/correctAnswers', cors(), getCorrectAnswersOfSingleQuestion);
+router.get('/mentalProblems', cors(), getAllMentalProblems);
+router.get('/mentalProblems/:mental_problem_id', cors(), getSingleMentalProblem);
 //router.post('/questionnaire', cors(), setResults);
 
 export default router;

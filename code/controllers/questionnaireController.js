@@ -81,7 +81,7 @@ export async function getAllQuestionsOfQuestionnaire(req, res) {
       data: []
     }
     for (let i = 0; i < rows.length; i++) {
-      jsonToSend.data.push(`/questionnaires/${params[0]}/questions/${rows[i].id}`)
+      jsonToSend.data.push(`/questions/${rows[i].id}`)
     }
     res.status(200).json(jsonToSend);
   } catch (err) {

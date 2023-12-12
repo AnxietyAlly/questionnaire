@@ -8,6 +8,7 @@ import {
   getCorrectAnswersOfSingleQuestion,
   getPossibleAnswersOfSingleQuestion,
   getSinglePossibleAnswer,
+  getSingleQuestionAnswerTemplate,
   getAllMentalProblems,
   getSingleMentalProblem,
 } from '../controllers/questionnaireController.js';
@@ -41,6 +42,7 @@ router.get('/questions/:question_id', cors(), getSingleQuestion);
 router.get('/questions/:question_id/correctAnswers', cors(), getCorrectAnswersOfSingleQuestion);
 router.get('/questions/:question_id/possibleAnswers', cors(), getPossibleAnswersOfSingleQuestion);
 router.get('/possibleAnswers/:possible_answer_id', cors(), getSinglePossibleAnswer);
+router.get('/questionAnswerTemplates/:question_answer_template_id', cors(), getSingleQuestionAnswerTemplate);
 router.get('/mentalProblems', cors(), getAllMentalProblems);
 router.get('/mentalProblems/:mental_problem_id', cors(), getSingleMentalProblem);
 //router.post('/questionnaire', cors(), setResults);

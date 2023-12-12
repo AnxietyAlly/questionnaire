@@ -184,8 +184,28 @@ export async function getSinglePossibleAnswer(req, res) {
     const row = stmnt.get(params);
     const jsonToSend = {
       meta: {
-        name: "Mental problem",
-        title: "Specific mental problem",
+        name: "Possible answer",
+        title: "Specific possible answer",
+        date: getToday(),
+        originalUrl: `${req.originalUrl}`,
+      },
+      data: row
+    }
+    res.status(200).json(jsonToSend);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getSingleQuestionAnswerTemplate(req, res) {
+  try {
+    const params = [req.params.question_answer_template_id];
+    const stmnt = db.prepare(`SELECT * FROM questionAnswerTemplates where id = ?`);
+    const row = stmnt.get(params);
+    const jsonToSend = {
+      meta: {
+        name: "Question answer template",
+        title: "Specific question answer template",
         date: getToday(),
         originalUrl: `${req.originalUrl}`,
       },

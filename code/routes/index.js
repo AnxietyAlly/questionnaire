@@ -6,8 +6,10 @@ import {
   getAllQuestionsOfQuestionnaire,
   getSingleQuestion,
   getCorrectAnswersOfSingleQuestion,
+  getPossibleAnswersOfSingleQuestion,
+  getSinglePossibleAnswer,
   getAllMentalProblems,
-  getSingleMentalProblem
+  getSingleMentalProblem,
 } from '../controllers/questionnaireController.js';
 const router = express.Router();
 
@@ -37,6 +39,8 @@ router.get('/questionnaires/:questionnaire_id', cors(), getSingleQuestionnaire);
 router.get('/questionnaires/:questionnaire_id/questions', cors(), getAllQuestionsOfQuestionnaire);
 router.get('/questions/:question_id', cors(), getSingleQuestion);
 router.get('/questions/:question_id/correctAnswers', cors(), getCorrectAnswersOfSingleQuestion);
+router.get('/questions/:question_id/possibleAnswers', cors(), getPossibleAnswersOfSingleQuestion);
+router.get('/possibleAnswers/:possible_answer_id', cors(), getSinglePossibleAnswer);
 router.get('/mentalProblems', cors(), getAllMentalProblems);
 router.get('/mentalProblems/:mental_problem_id', cors(), getSingleMentalProblem);
 //router.post('/questionnaire', cors(), setResults);

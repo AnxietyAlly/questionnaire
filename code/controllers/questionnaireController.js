@@ -151,6 +151,52 @@ export async function getCorrectAnswersOfSingleQuestion(req, res) {
   }
 }
 
+export async function getPossibleAnswersOfSingleQuestion(req, res) {
+  try {
+    const params = [req.params.question_id];
+    let stmnt = db.prepare(`SELECT * FROM questionnaireQuestions where id = ?`);
+    const row = stmnt.get(params);
+
+    stmnt = db.prepare(`SELECT * FROM possibleAnswers where question_answer_template_id = ${row.question_answer_template_id}`);
+    const rows = stmnt.all();
+    const jsonToSend = {
+      meta: {
+        name: "Correct answers for question",
+        title: "All correct answers for a question",
+        date: getToday(),
+        originalUrl: `${req.originalUrl}`,
+      },
+      data: []
+    }
+    for (let i = 0; i < rows.length; i++) {
+      jsonToSend.data.push(`/possibleAnswers/${rows[i].id}`)
+    }
+    res.status(200).json(jsonToSend);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getSinglePossibleAnswer(req, res) {
+  try {
+    const params = [req.params.possible_answer_id];
+    const stmnt = db.prepare(`SELECT * FROM possibleAnswers where id = ?`);
+    const row = stmnt.get(params);
+    const jsonToSend = {
+      meta: {
+        name: "Mental problem",
+        title: "Specific mental problem",
+        date: getToday(),
+        originalUrl: `${req.originalUrl}`,
+      },
+      data: row
+    }
+    res.status(200).json(jsonToSend);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export async function getAllMentalProblems(req, res) {
   try {
     const stmnt = db.prepare("SELECT * FROM mentalProblems");

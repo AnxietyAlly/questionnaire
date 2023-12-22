@@ -258,3 +258,23 @@ export async function getSingleMentalProblem(req, res) {
     console.log(err);
   }
 }
+
+export async function getSingleExtraInformation(req, res) {
+  try {
+    const params = [req.params.extra_information_id];
+    const stmnt = db.prepare(`SELECT * FROM extraInformation where id = ?`);
+    const row = stmnt.get(params);
+    const jsonToSend = {
+      meta: {
+        name: "Extra information",
+        title: "Specific extra information",
+        date: getToday(),
+        originalUrl: `${req.originalUrl}`,
+      },
+      data: row
+    }
+    res.status(200).json(jsonToSend);
+  } catch (err) {
+    console.log(err);
+  }
+}

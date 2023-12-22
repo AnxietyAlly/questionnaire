@@ -11,6 +11,7 @@ import {
   getSingleQuestionAnswerTemplate,
   getAllMentalProblems,
   getSingleMentalProblem,
+  getSingleExtraInformation,
 } from '../controllers/questionnaireController.js';
 const router = express.Router();
 
@@ -45,6 +46,7 @@ router.get('/possibleAnswers/:possible_answer_id', cors(), getSinglePossibleAnsw
 router.get('/questionAnswerTemplates/:question_answer_template_id', cors(), getSingleQuestionAnswerTemplate);
 router.get('/mentalProblems', cors(), getAllMentalProblems);
 router.get('/mentalProblems/:mental_problem_id', cors(), getSingleMentalProblem);
+router.get('/extraInformation/:extra_information_id', cors(), getSingleExtraInformation())
 //router.post('/questionnaire', cors(), setResults);
 
 export default router;
